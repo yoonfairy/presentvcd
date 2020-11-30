@@ -1,0 +1,99 @@
+<%- include('../partials/header') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="../">PresentVcd</a>
+
+</nav>
+<br />
+
+
+<div class="container">
+    <iframe class="col-md-12" height="300" src="<%= movie.trailer%>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <h2>Movie Edit Form</h2>
+    <form action="/admin/edit/<%= movie.id%>" method="POST" >
+      <% if(error) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+        <%
+        }%>
+
+        <% if(success) { %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+        <%
+        }%>
+        <input value="<%= movie._id %>" name="id" hidden/>
+        <div class="form-group">
+
+            <label for="id">Movie Id</label>
+            <input class="form-control" id="id" name="movieId" placeholder="Movie Id" value="<%=movie.movieId %>" required />
+        </div>
+        <div class="form-group">
+            <label for="name">Movie Name</label>
+            <input class="form-control" id="name" placeholder="Movie Name" name="name" value="<%=movie.name %>" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="form-check" style="display: block">Movie Type</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="horror" name="type" <%=movie.type.includes('horror')? "checked" : ""%>/>
+                <label class="form-check-label" for="inlineCheckbox1">Horror</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="drama" name="type" <%=movie.type.includes('drama')? "checked" : ""%>/>
+                <label class="form-check-label" for="inlineCheckbox2">Drama</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="action" name="type" <%=movie.type.includes('action')? "checked" : ""%>/>
+                <label class="form-check-label" for="inlineCheckbox1">Action</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="mystery" name="type" <%=movie.type.includes('mystery')? "checked" : ""%>/>
+                <label class="form-check-label" for="inlineCheckbox2">Mystery</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="triller" name="type" <%=movie.type.includes('triller')? "checked" : ""%>/>
+                <label class="form-check-label" for="inlineCheckbox1">Triller</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="fantasy" name="type" <%=movie.type.includes('fantasy')? "checked" : ""%>/>
+                <label class="form-check-label" for="inlineCheckbox2">Fantasy</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="comedy" name="type" <%=movie.type.includes('comedy')? "checked" : ""%>/>
+                <label class="form-check-label" for="inlineCheckbox2">Comedy</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="romance" name="type" <%=movie.type.includes('romance')? "checked" : ""%>/>
+                <label class="form-check-label" for="inlineCheckbox2">Romance</label>
+              </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Movie Price</label>
+            <input class="form-control" id="price" placeholder="Movie Price" name="price" value="<%=movie.price %>" required />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Movie Available</label>
+            <input class="form-control" id="price" placeholder="Movie Available" name="available" value="<%=movie.available %>" required />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Trailer Link</label>
+            <input class="form-control" id="price" placeholder="Trailer Link" name="trailer" value="<%=movie.trailer %>" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" rows="3" name="description" ><%=movie.description %></textarea>
+        </div>
+
+    
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+
+<%- include('../partials/footer') %>

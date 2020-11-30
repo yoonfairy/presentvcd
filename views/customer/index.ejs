@@ -1,0 +1,93 @@
+<%- include('../partials/header') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">PresentVcd</a>
+
+</nav>
+<br />
+
+
+<a type="button" href="/customer/<%=id%>/viewRent" style="margin: 20px" class="btn btn-outline-warning btn-lg">
+  ငှားထား သောစာရင်း
+</a>
+<a type="button" href="/customer/<%=id%>/viewOrder" style="margin: 20px" class="btn btn-outline-warning btn-lg">
+  ကြိုမှာထားသောခွေ
+</a>
+
+<div class="dropdown show" style="display: inline-block;">
+  <a class="btn btn-warning dropdown-toggle btn-lg " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    ဇာတ်ကား အမျိုးအစား
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="/customer/<%=id%>/">All</a>
+    <a class="dropdown-item" href="/customer/<%=id%>/horror">Horror</a>
+    <a class="dropdown-item" href="/customer/<%=id%>/drama">Drama</a>
+    <a class="dropdown-item" href="/customer/<%=id%>/action">Action</a>
+    <a class="dropdown-item" href="/customer/<%=id%>/mystery">Mystery</a>
+    <a class="dropdown-item" href="/customer/<%=id%>/triller">Triller</a>
+    <a class="dropdown-item" href="/customer/<%=id%>/fantasy">Fantasy</a>
+    <a class="dropdown-item" href="/customer/<%=id%>/comedy">Comedy</a>
+    <a class="dropdown-item" href="/customer/<%=id%>/romance">Romance</a>
+  
+  </div>
+</div>
+
+<% if(message) { %>
+<div class="alert alert-success" role="alert">
+  <%= message %>
+</div>
+<%
+        }%>
+
+<table class="table table-dark" style="margin-top: 20px">
+  <thead>
+    <tr>
+
+      <th scope="col">ပုံ</th>
+      <th scope="col">ဇာတ်ကား အိုင်ဒီ</th>
+      <th scope="col">နာမည်</th>
+      
+      <th scope="col">ငှားခ</th>
+      <th scope="col">အမျိုးအစား</th>
+      <th scope="col">ကျန်သောခွေ</th>
+
+      <th scope="col"></th>
+      <!-- <th scope="col" colspan=""></th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <% movies.forEach(function(movie) { %>
+    <tr>
+
+      <td>
+        <img width="100" height="100" class="img-thumbnail" src=" <%= movie.poster %>" />
+      </td>
+
+      <td><%=movie.movieId %></td>
+      <td><%=movie.name %></td>
+      <td><%=movie.price %></td>
+      <td><%=movie.type.toString() %></td>
+      <td><%=movie.available %> ခွေ</th>
+      <td>
+        <form style="display: inline" method="GET" action="/customer/<%= id%>/rent/<%=movie.movieId%>">         
+         
+          <% if(movie.available > 0) { %>
+            <button type="submit" class="btn btn-warning" >ငှားမည်</button>
+            <%
+          }%>
+           
+           <% if(movie.available <= 0) { %>
+           <a class="btn btn-primary" href="/customer/<%=id%>/order/<%=movie.movieId %>">အော် ဒါ</a>
+            <%
+          }%>
+        
+        </form>
+       
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

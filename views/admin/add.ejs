@@ -1,0 +1,100 @@
+<%- include('../partials/header') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="../admin/">PresentVcd</a>
+
+</nav>
+<br />
+
+
+<div class="container">
+    <h2>Movie Registration Form</h2>
+    <form action="/admin/add" method="POST" enctype="multipart/form-data">
+      <% if(error) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+        <%
+        }%>
+
+        <% if(success) { %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+        <%
+        }%>
+        <div class="form-group">
+
+            <label for="id">Movie Id</label>
+            <input class="form-control" id="id" name="id" placeholder="Movie Id" required />
+        </div>
+        <div class="form-group">
+            <label for="name">Movie Name</label>
+            <input class="form-control" id="name" placeholder="Movie Name" name="name" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="form-check" style="display: block">Movie Type</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="horror" name="type" checked>
+                <label class="form-check-label" for="inlineCheckbox1">Horror</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="drama" name="type">
+                <label class="form-check-label" for="inlineCheckbox2">Drama</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="action" name="type">
+                <label class="form-check-label" for="inlineCheckbox1">Action</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="mystery" name="type">
+                <label class="form-check-label" for="inlineCheckbox2">Mystery</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="triller" name="type">
+                <label class="form-check-label" for="inlineCheckbox1">Triller</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="fantasy" name="type">
+                <label class="form-check-label" for="inlineCheckbox2">Fantasy</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="comedy" name="type">
+                <label class="form-check-label" for="inlineCheckbox2">Comedy</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="romance" name="type">
+                <label class="form-check-label" for="inlineCheckbox2">Romance</label>
+              </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Movie Price</label>
+            <input class="form-control" id="price" placeholder="Movie Price" name="price" required />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Movie Available (0-4)</label>
+            <input class="form-control" id="price" placeholder="Movie Available" name="available" required />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Trailer Link</label>
+            <input class="form-control" id="price" placeholder="Trailer Link" name="trailer" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Poster</label>
+            <input type="file" name="file" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+
+<%- include('../partials/footer') %>

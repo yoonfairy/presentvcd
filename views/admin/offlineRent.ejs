@@ -1,0 +1,119 @@
+<%- include('../partials/header') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="../admin">PresentVcd</a>
+
+</nav>
+<br />
+
+
+<div class="container">
+
+  <% if(error) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= error %>
+    </div>
+    <%
+    }%>
+
+    <% if(success) { %>
+    <div class="alert alert-success" role="alert">
+        <%= success %>
+    </div>
+    <%
+    }%>
+ 
+
+        <h2>Offine Rent Form</h2>
+        <form action="/admin/offlineRent" method="POST" >
+         
+            <div class="form-group">
+                <label for="movieId">Movie Id</label>
+                <input
+                  class="form-control"
+                  id="movieId"
+                  name="movieId"
+                  placeholder="Movie Id" required
+                />
+              </div>
+
+
+          <div class="form-group">
+            <label for="name">Customer Name</label>
+            <input
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Customer Name" required
+            />
+          </div>
+          <div class="form-group">
+            <label for="phno">Customer Phone Number</label>
+            <input
+              class="form-control"
+              id="phno"
+              placeholder="Customer Phone Number"
+              name="phNo" required
+            />
+          </div>
+          <div class="form-group">
+            <label for="address">Customer Address</label>
+            <input
+              class="form-control"
+              id="address"
+              placeholder="Customer Address"
+              name="address" required
+            />
+          </div>
+        
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input
+              class="form-control"
+              id="quantity"
+              placeholder="Quantity"
+              name="qty"
+              value="" required
+            />
+          </div>
+          
+    
+      
+      
+          <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+        </form>
+
+    
+           
+     
+
+  
+
+
+      
+   
+</div>
+
+<script> 
+  const quantity = document.getElementById("quantity");
+  const price = document.getElementById("price");
+  const available = document.getElementById("available").innerText;
+  const button = document.getElementById("submit");
+
+  const originalPrice = document.getElementById("originalPrice");
+
+
+
+  quantity.addEventListener("change", function(e) {
+      price.innerText = parseInt(originalPrice.innerText) * parseInt(e.target.value);
+
+      if(e.target.value > available) {
+        button.hidden = true;
+      } else {
+        button.hidden = false;
+      }
+  })
+
+
+</script>
+
+<%- include('../partials/footer') %>

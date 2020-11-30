@@ -1,0 +1,130 @@
+<%- include('../partials/header') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="../">PresentVcd</a>
+
+</nav>
+<br />
+
+
+<div class="container">
+
+  <% if(error) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= error %>
+    </div>
+    <%
+    }%>
+
+    <% if(success) { %>
+    <div class="alert alert-success" role="alert">
+        <%= success %>
+    </div>
+    <%
+    }%>
+    <div class="row">
+      <% if(movie.trailer) { %>
+        <iframe class="col-md-12" height="300" src="<%= movie.trailer%>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <%
+        }%>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>ငှားရန်</h2>
+            <form action="/customer/<%=id%>/rent/<%=movie.movieId%>" method="POST" >
+             
+              <div class="form-group">
+                <label for="name">ငှားရမ်းသူနာမည်</label>
+                <input
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Your Name" required
+                />
+              </div>
+              <div class="form-group">
+                <label for="phno">ဖုန်းနံပါတ်</label>
+                <input
+                  class="form-control"
+                  id="phno"
+                  placeholder="Your Phone Number"
+                  name="phNo" required
+                />
+              </div>
+              <div class="form-group">
+                <label for="address">လိပ်စာ</label>
+                <input
+                  class="form-control"
+                  id="address"
+                  placeholder="Address"
+                  name="address" required
+                />
+              </div>
+            
+              <div class="form-group">
+                <label for="quantity">အရေအတွက်</label>
+                <input
+                  class="form-control"
+                  id="quantity"
+                  placeholder="Quantity"
+                  name="qty"
+                  value="" required
+                />
+              </div>
+              
+              <input hidden value="<%=movie.movieId%>" name="movieId" />
+              <input hidden value="<%=id%>" name="ID" />
+          
+          
+              <button type="submit" class="btn btn-primary" id="submit">ငှားမည်</button>
+            </form>
+        </div>
+
+        <% if(movie) { %>
+          <div class="col-md-6">
+            <h3>Your Item Information</h3>
+            <div class="card" >
+                <img class="card-img-top" src="<%=movie.poster%>" height="200" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">နာမည်: <%=movie.name%></h5>
+                  <p class="card-text">အမျိုးအစား: <%=movie.type.toString()%> </p>
+                  <p class="card-text">ငှားခ: <span id="originalPrice"> <%=movie.price%></span> </p>
+                  <p class="card-text">ကျန်ရှိခွေ:  <span id="available"><%=movie.available%></span> </p>
+                  <p class="card-text">ဇာတ်လမ်းအကျဉ်း : <%=movie.description%> </p>
+                  <p class="card-text">စုစုပေါင်း ငှားရမ်းခ:  <span id="price"> <%=movie.price%></span> </p>
+                  
+                </div>
+              </div>
+        </div>
+          <%
+          }%>
+
+
+      
+    </div>
+</div>
+
+<script> 
+  const quantity = document.getElementById("quantity");
+  const price = document.getElementById("price");
+  const available = document.getElementById("available").innerText;
+  const button = document.getElementById("submit");
+
+  const originalPrice = document.getElementById("originalPrice");
+
+
+
+  quantity.addEventListener("change", function(e) {
+      price.innerText = parseInt(originalPrice.innerText) * parseInt(e.target.value);
+
+      if(e.target.value > available) {
+        button.hidden = true;
+      } else {
+        button.hidden = false;
+      }
+  })
+
+
+</script>
+
+<%- include('../partials/footer') %>

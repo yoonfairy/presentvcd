@@ -1,0 +1,94 @@
+<%- include('../partials/header') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="../admin/">PresentVcd</a>
+
+</nav>
+<br />
+
+<a href="/admin/viewOfflineRent" class="btn btn-info" style="margin: 20px">ဆိုင်လာငှားသူများစာရင်း</a>
+
+<h2 class="text-info text-center">အွန်လိုင်း ငှားရမ်းသူများစာရင်း</h2>
+
+<% if(error) { %>
+  <div class="alert alert-danger" role="alert">
+      <%= error %>
+  </div>
+  <%
+  }%>
+
+  <% if(success) { %>
+  <div class="alert alert-success" role="alert">
+      <%= success %>
+  </div>
+  <%
+  }%>
+<table class="table table-dark" style="margin-top: 20px">
+    <thead>
+      <tr>
+  
+        <th scope="col">ဇာတ်ကား အိုင်ဒီ</th>
+        <th scope="col">ဇာတ်ကားနာမည်</th>
+        <th scope="col">အရေအတွက်</th>
+        <th scope="col">အပ်ရမည့်ရက်</th>
+        <th scope="col">စတင်ငှားသည့်ရက်</th>
+        <th scope="col">စုစုပေါင်းငှားရမ်းခ</th>
+        
+        <th scope="col">ငှားရမ်းသူ နာမည်</th>
+        <th scope="col">ဖုန်းနံပါတ်</th>
+        <th scope="col">နေရပ်လိပ်စာ</th>
+        <th scope="col">ရက်လွန် ရက်</th>
+        <th scope="col">ရက်လွန် ကြေး</th>
+        <th scope="col">အပ်ပြီး</th>
+        <th scope="col"></th>
+
+  
+      
+        <!-- <th scope="col" colspan=""></th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <% rents.forEach(function(rent) {
+        
+        let today = new Date();
+        let days;
+
+        let overDueDay = 0;
+        let overDueFee = 0;
+        if(today > rent.dueDate && !rent.finished ){
+          overDueDay = parseInt(Math.round((today-rent.dueDate) / 86400000));
+          overDueFee = parseInt(overDueDay * 200);
+        }
+
+       
+        
+        %>
+
+      <tr>
+  
+        <td><%= rent.movieId %></td>
+        <td><%= rent.movieName %></td>
+        <td><%= rent.qty %></td>
+        <td><%= rent.dueDate.toLocaleDateString() %></td>
+        <td><%= rent.rentedDate.toLocaleDateString() %></td>
+        <td><%= rent.totalPrice %></td>
+        <td><%= rent.name %></td>
+        <td><%= rent.phNo %></td>
+        <td><%= rent.address %></td>
+        <td><%= overDueDay %></td>
+        <td><%= overDueFee %></td>
+        <td><%= rent.finished ? "yes" : "no" %></td>
+        <td><% if(!rent.finished) { %>
+          <form action="" method="POST">
+            <input value="<%= rent._id%>" name="id" hidden/>
+            <button type="submit" class="btn btn-success">အပ်ပြီး</button>
+          </form>
+        <%} %></td>
+ 
+  
+     
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+<%- include('../partials/footer') %>

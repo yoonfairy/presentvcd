@@ -1,0 +1,99 @@
+<%- include('../partials/header') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="../">PresentVcd</a>
+</nav>
+<br />
+
+<div class="container">
+  <% if(error) { %>
+  <div class="alert alert-danger" role="alert"><%= error %></div>
+  <% }%> <% if(success) { %>
+  <div class="alert alert-success" role="alert"><%= success %></div>
+  <% }%>
+
+  <h2>အော်ဒါတင်ရန်</h2>
+  <form action="/customer/<%=id%>/order/<%=code%>" method="POST">
+    <div class="form-group">
+      <label for="name">ဇာတ်ကားအိုင်ဒီ</label>
+      <input
+        class="form-control"
+        value="<%=code%>" required
+        disabled
+      />
+      <input
+      class="form-control"
+      id="movieId"
+      name="movieId"
+      placeholder="Moive Id"
+      value="<%=code%>" required
+      hidden
+    />
+    </div>
+
+    <div class="form-group">
+      <label for="name">ငှားရမ်းသူနာမည်</label>
+      <input
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Your Name" required
+      />
+      
+    </div>
+    <div class="form-group">
+      <label for="phno">ဖုန်းနံပါတ်</label>
+      <input
+        class="form-control"
+        id="phno"
+        placeholder="Your Phone Number"
+        name="phNo" required
+      />
+    </div>
+    <div class="form-group">
+      <label for="address">လိပ်စာ</label>
+      <input
+        class="form-control"
+        id="address"
+        placeholder="Address"
+        name="address" required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">အရေအတွက်</label>
+      <input
+        class="form-control"
+        id="quantity"
+        placeholder="Quantity"
+        name="qty"
+        value="" required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="submit">အော်ဒါ</button>
+  </form>
+</div>
+
+<script>
+  const qty = document.getElementById("quantity");
+  var button = document.getElementById("submit");
+
+  qty.addEventListener("change", function () {
+    const value = parseInt(qty.value);
+    console.log(value);
+    if (value > 4) {
+      console.log("gr");
+      button.hidden = true;
+    } else {
+      console.log("lr");
+      button.hidden = false;
+    }
+    // if (parseInt(qty.value) > 4) {
+    //   submit.hidden = true;
+    // } else {
+    //   submit.hidden = false;
+    // }
+  });
+</script>
+
+<%- include('../partials/footer') %>
